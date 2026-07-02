@@ -138,7 +138,7 @@ with an auto-generated [CHANGELOG.md](CHANGELOG.md). Merging that PR:
 
 1. tags the release and publishes it on GitHub
 2. builds and attaches zipped, ready-to-install plugin bundles for
-   linux/darwin × amd64/arm64
+   linux/darwin/windows × amd64/arm64
 3. regenerates `server.json` from those exact assets (fresh version +
    SHA-256 hashes) and publishes it to the
    [official MCP Registry](https://registry.modelcontextprotocol.io/) via

@@ -34,6 +34,10 @@ jobs:
             goarch: amd64
           - goos: darwin
             goarch: arm64
+          - goos: windows
+            goarch: amd64
+          - goos: windows
+            goarch: arm64
     steps:
       - name: Checkout at tag
         uses: actions/checkout@v4
@@ -54,6 +58,7 @@ jobs:
         run: |
           set -euo pipefail
           BIN="s3-connector-server"
+          [ "$GOOS" = "windows" ] && BIN="s3-connector-server.exe"
           go build -trimpath -ldflags="-s -w -X main.version=${{ inputs.tag }}" -o "$BIN" .
           echo "BIN=$BIN" >> "$GITHUB_ENV"
 
@@ -65,7 +70,9 @@ jobs:
           mkdir -p "$STAGE/plugin/.claude-plugin" "$STAGE/plugin/servers/go"
           cp "$BIN" "$STAGE/plugin/servers/go/"
           cp ../plugin/.claude-plugin/plugin.json "$STAGE/plugin/.claude-plugin/"
-          cp ../plugin/.mcp.json "$STAGE/plugin/"
+          # Rewrite the command's binary name so Windows bundles point at
+          # the .exe (BIN is "s3-connector-server[.exe]" from the build step above).
+          sed "s#servers/go/s3-connector-server#servers/go/${BIN}#" ../plugin/.mcp.json > "$STAGE/plugin/.mcp.json"
           cp ../README.md ../SETUP.md ../LICENSE "$STAGE/"
           ( cd /tmp && zip -r -q "${NAME}.zip" "$NAME" )
           mv "/tmp/${NAME}.zip" .

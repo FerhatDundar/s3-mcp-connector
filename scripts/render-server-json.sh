@@ -7,7 +7,7 @@
 # Usage: render-server-json.sh <version> <tag> <asset-dir>
 #   version    e.g. 0.1.0  (no leading v)
 #   tag        e.g. v0.1.0 (matches the GitHub release tag)
-#   asset-dir  directory containing the four
+#   asset-dir  directory containing the
 #              s3-mcp-connector-plugin-<tag>-<goos>-<goarch>.zip files
 #
 # Prints the rendered server.json to stdout.
@@ -22,7 +22,7 @@ VERSION="$1"
 TAG="$2"
 ASSET_DIR="$3"
 REPO="FerhatDundar/s3-mcp-connector"
-PLATFORMS=(darwin-arm64 darwin-amd64 linux-amd64 linux-arm64)
+PLATFORMS=(darwin-arm64 darwin-amd64 linux-amd64 linux-arm64 windows-amd64 windows-arm64)
 
 command -v jq >/dev/null || { echo "jq is required" >&2; exit 1; }
 command -v shasum >/dev/null && HASH_CMD=(shasum -a 256) || HASH_CMD=(sha256sum)
