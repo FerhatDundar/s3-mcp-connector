@@ -47,6 +47,6 @@ jobs:
           tar -czf "${out}.tar.gz" "$out"
 
       - name: Upload release asset
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: go-server/*.tar.gz
