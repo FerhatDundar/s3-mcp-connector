@@ -1,0 +1,69 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.FerhatDundar/s3-mcp-connector",
+  "description": "MCP server for Amazon S3 and any S3-compatible endpoint (LocalStack, MinIO): list buckets, list/read/write/delete objects, create/delete buckets. Single static Go binary, no runtime dependencies.",
+  "repository": {
+    "url": "https://github.com/FerhatDundar/s3-mcp-connector",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "websiteUrl": "https://github.com/FerhatDundar/s3-mcp-connector#readme",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/FerhatDundar/s3-mcp-connector/releases/download/v0.1.0/s3-mcp-connector-plugin-v0.1.0-darwin-arm64.zip",
+      "version": "0.1.0",
+      "fileSha256": "a9ca8cabc23ba69657b4b5c9af670cd10acfcb5144520a514002aecb7f42bbfd",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        { "name": "AWS_ACCESS_KEY_ID", "description": "AWS access key ID", "isRequired": true, "isSecret": true, "format": "string" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "description": "AWS secret access key", "isRequired": true, "isSecret": true, "format": "string" },
+        { "name": "AWS_REGION", "description": "AWS region (default us-east-1)", "isRequired": false, "format": "string" },
+        { "name": "S3_ENDPOINT_URL", "description": "Custom S3 endpoint, e.g. http://localhost:4566 for LocalStack. Leave unset for real AWS.", "isRequired": false, "format": "string" },
+        { "name": "S3_FORCE_PATH_STYLE", "description": "Set to 'true' for LocalStack/MinIO path-style addressing.", "isRequired": false, "format": "string" }
+      ]
+    },
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/FerhatDundar/s3-mcp-connector/releases/download/v0.1.0/s3-mcp-connector-plugin-v0.1.0-darwin-amd64.zip",
+      "version": "0.1.0",
+      "fileSha256": "d970d370bf6bd5595ddc8b96f45d8d840567bb47cebbc104e5ea2a14a1ee0ac1",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        { "name": "AWS_ACCESS_KEY_ID", "description": "AWS access key ID", "isRequired": true, "isSecret": true, "format": "string" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "description": "AWS secret access key", "isRequired": true, "isSecret": true, "format": "string" },
+        { "name": "AWS_REGION", "description": "AWS region (default us-east-1)", "isRequired": false, "format": "string" },
+        { "name": "S3_ENDPOINT_URL", "description": "Custom S3 endpoint, e.g. http://localhost:4566 for LocalStack. Leave unset for real AWS.", "isRequired": false, "format": "string" },
+        { "name": "S3_FORCE_PATH_STYLE", "description": "Set to 'true' for LocalStack/MinIO path-style addressing.", "isRequired": false, "format": "string" }
+      ]
+    },
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/FerhatDundar/s3-mcp-connector/releases/download/v0.1.0/s3-mcp-connector-plugin-v0.1.0-linux-amd64.zip",
+      "version": "0.1.0",
+      "fileSha256": "e845c991d5d412c1f4a7435bb676138cf070dfc4084a9230487962f452175634",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        { "name": "AWS_ACCESS_KEY_ID", "description": "AWS access key ID", "isRequired": true, "isSecret": true, "format": "string" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "description": "AWS secret access key", "isRequired": true, "isSecret": true, "format": "string" },
+        { "name": "AWS_REGION", "description": "AWS region (default us-east-1)", "isRequired": false, "format": "string" },
+        { "name": "S3_ENDPOINT_URL", "description": "Custom S3 endpoint, e.g. http://localhost:4566 for LocalStack. Leave unset for real AWS.", "isRequired": false, "format": "string" },
+        { "name": "S3_FORCE_PATH_STYLE", "description": "Set to 'true' for LocalStack/MinIO path-style addressing.", "isRequired": false, "format": "string" }
+      ]
+    },
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/FerhatDundar/s3-mcp-connector/releases/download/v0.1.0/s3-mcp-connector-plugin-v0.1.0-linux-arm64.zip",
+      "version": "0.1.0",
+      "fileSha256": "ac3ae2be4308a703925725e2eb4a10773757e86090b6841b57d474088599964e",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        { "name": "AWS_ACCESS_KEY_ID", "description": "AWS access key ID", "isRequired": true, "isSecret": true, "format": "string" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "description": "AWS secret access key", "isRequired": true, "isSecret": true, "format": "string" },
+        { "name": "AWS_REGION", "description": "AWS region (default us-east-1)", "isRequired": false, "format": "string" },
+        { "name": "S3_ENDPOINT_URL", "description": "Custom S3 endpoint, e.g. http://localhost:4566 for LocalStack. Leave unset for real AWS.", "isRequired": false, "format": "string" },
+        { "name": "S3_FORCE_PATH_STYLE", "description": "Set to 'true' for LocalStack/MinIO path-style addressing.", "isRequired": false, "format": "string" }
+      ]
+    }
+  ]
+}
