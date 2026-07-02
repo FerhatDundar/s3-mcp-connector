@@ -1,6 +1,6 @@
 module s3-connector-server
 
-go 1.25.5
+go 1.25.11
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.32.6
