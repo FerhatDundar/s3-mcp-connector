@@ -6,10 +6,13 @@
 
 [![CI](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/ci.yml/badge.svg)](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/codeql.yml/badge.svg)](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/codeql.yml)
+[![Latest release](https://img.shields.io/github/v/release/FerhatDundar/s3-mcp-connector?color=blueviolet&label=release)](https://github.com/FerhatDundar/s3-mcp-connector/releases/latest)
 [![Go Reference](https://img.shields.io/badge/go-1.25%2B-00ADD8?logo=go&logoColor=white)](https://go.dev/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 [![Tested with LocalStack](https://img.shields.io/badge/tested%20with-LocalStack-6A2FEE?logo=amazonaws&logoColor=white)](https://localstack.cloud/)
 [![MCP](https://img.shields.io/badge/protocol-MCP-orange)](https://modelcontextprotocol.io/)
+[![Conventional Commits](https://img.shields.io/badge/commits-conventional-ff69b4)](https://www.conventionalcommits.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 </div>
 
@@ -54,6 +57,13 @@ files, not bulk transfer. Reach for the AWS CLI or SDK directly for large
 objects.
 
 ## 🚀 Quickstart
+
+**Fastest path:** grab a prebuilt bundle from the [latest release](https://github.com/FerhatDundar/s3-mcp-connector/releases/latest) —
+download `s3-mcp-connector-plugin-<version>-<os>-<arch>.zip`, unzip it,
+and point Cowork/Claude at the `plugin/` folder inside (see step 4 of
+[SETUP.md](SETUP.md)). No Go toolchain required.
+
+**From source:**
 
 ```bash
 # 1. Build
@@ -112,38 +122,72 @@ production Go service:
 
 All of it runs in [CI](.github/workflows/ci.yml) on every push and PR.
 
+## 🏷️ Releases & versioning
+
+Versions follow [semver](https://semver.org/) and are cut automatically by
+[release-please](https://github.com/googleapis/release-please) from
+[Conventional Commits](https://www.conventionalcommits.org/) on `main`:
+
+- `fix: ...` → patch (`v0.1.0` → `v0.1.1`)
+- `feat: ...` → minor (`v0.1.1` → `v0.2.0`)
+- `feat!: ...` / `BREAKING CHANGE:` footer → major (`v0.2.0` → `v1.0.0`)
+
+Every merged PR updates a standing **"chore(main): release vX.Y.Z"** PR
+with an auto-generated [CHANGELOG.md](CHANGELOG.md). Merging that PR tags
+the release, publishes it on GitHub, and a follow-up job builds and
+attaches zipped, ready-to-install plugin bundles for
+linux/darwin × amd64/arm64. See [.github/workflows/release-please.yml](.github/workflows/release-please.yml).
+
 ## 📁 Layout
 
 ```
 s3-mcp-connector/
-├── README.md               ← you are here
-├── SETUP.md                ← step-by-step setup guide (LocalStack + real AWS)
-├── LICENSE                 ← MIT
-├── Makefile                ← build / test / lint / localstack shortcuts
-├── docker-compose.yml      ← LocalStack, for local testing
-├── .golangci.yml           ← lint rules
+├── README.md                  ← you are here
+├── SETUP.md                   ← step-by-step setup guide (LocalStack + real AWS)
+├── CONTRIBUTING.md             ← how to contribute
+├── CODE_OF_CONDUCT.md
+├── SECURITY.md                 ← vulnerability reporting
+├── CODEOWNERS
+├── LICENSE                     ← MIT
+├── Makefile                    ← build / test / lint / localstack shortcuts
+├── docker-compose.yml          ← LocalStack, for local testing
+├── .golangci.yml                ← lint rules
+├── release-please-config.json  ← semver/changelog automation config
+├── .release-please-manifest.json
 ├── .github/
 │   ├── workflows/
-│   │   ├── ci.yml           ← build, vet, test, lint, govulncheck
-│   │   ├── codeql.yml       ← security scanning
-│   │   └── release.yml      ← cross-platform binaries on tag push
+│   │   ├── ci.yml                     ← build, vet, test, lint, govulncheck
+│   │   ├── codeql.yml                 ← security scanning
+│   │   ├── pr-title.yml               ← Conventional Commits PR title check
+│   │   ├── release-please.yml         ← version PRs, tagging, GitHub releases
+│   │   └── rebuild-release-assets.yml ← manual re-attach fallback
+│   ├── ISSUE_TEMPLATE/
+│   ├── PULL_REQUEST_TEMPLATE.md
 │   └── dependabot.yml
-├── go-server/               ← the MCP server source
+├── go-server/                  ← the MCP server source
 │   ├── main.go
 │   ├── main_test.go
 │   ├── go.mod / go.sum
 │   └── README.md
-└── plugin/                  ← installable Cowork/Claude plugin
+└── plugin/                     ← installable Cowork/Claude plugin
     ├── .claude-plugin/plugin.json
-    ├── .mcp.json             ← holds credentials locally — never commit real ones
-    └── servers/go/           ← compiled binary goes here
+    ├── .mcp.json                ← holds credentials locally — never commit real ones
+    └── servers/go/              ← compiled binary goes here
 ```
 
 ## 🤝 Contributing
 
-Issues and PRs welcome. Before opening a PR: `make fmt vet test lint`
-(or just push — CI runs the same checks). Commit messages loosely follow
-[Conventional Commits](https://www.conventionalcommits.org/).
+PRs and issues are very welcome — see **[CONTRIBUTING.md](CONTRIBUTING.md)**
+for the full guide (setup, coding conventions, how to add a new tool) and
+the **[Code of Conduct](CODE_OF_CONDUCT.md)**.
+
+`main` is protected: every change, including the maintainer's, lands via
+pull request with CI green. PR titles must follow
+[Conventional Commits](https://www.conventionalcommits.org/) — that's what
+drives the automatic versioning above.
+
+Found a security issue? Please follow **[SECURITY.md](SECURITY.md)**
+instead of opening a public issue.
 
 ## 📄 License
 

@@ -7,10 +7,17 @@ that route.
 
 ---
 
-## 1. Build the server binary
+## 1. Get the server binary
 
-You need Go 1.23+ installed (`go version` to check; get it from
-<https://go.dev/dl/> if not) and Docker (for LocalStack testing).
+**Option A — download a release (no Go needed):** grab
+`s3-mcp-connector-plugin-<version>-<os>-<arch>.zip` from the
+[latest release](https://github.com/FerhatDundar/s3-mcp-connector/releases/latest)
+and unzip it — the `plugin/` folder inside is ready to install, skip to
+step 4.
+
+**Option B — build from source:** you need Go 1.25+ installed
+(`go version` to check; get it from <https://go.dev/dl/> if not) and
+Docker (for LocalStack testing).
 
 ```bash
 cd subprojects/s3-mcp-connector/go-server

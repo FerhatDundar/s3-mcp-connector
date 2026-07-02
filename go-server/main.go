@@ -494,7 +494,16 @@ func renderJSON(v any) string {
 	return string(b)
 }
 
+// version is set at build time via -ldflags "-X main.version=vX.Y.Z" by the
+// release workflow. Local `go build` leaves it at "dev".
+var version = "dev"
+
 func main() {
+	if len(os.Args) > 1 && (os.Args[1] == "--version" || os.Args[1] == "-version") {
+		fmt.Println("s3-connector-server " + version)
+		return
+	}
+
 	ctx := context.Background()
 	client, err := newS3Client(ctx)
 	if err != nil {
