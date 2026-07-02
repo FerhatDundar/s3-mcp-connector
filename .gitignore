@@ -1,0 +1,5 @@
+.env
+*.token
+localstack-data/
+go-server/s3-connector-server
+plugin/servers/go/s3-connector-server

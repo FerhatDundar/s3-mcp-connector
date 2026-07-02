@@ -1,0 +1,29 @@
+version: "2"
+
+run:
+  timeout: 3m
+
+linters:
+  default: none
+  enable:
+    - govet
+    - staticcheck
+    - errcheck
+    - ineffassign
+    - unused
+    - misspell
+    - bodyclose
+    - gosec
+    - unconvert
+  settings:
+    gosec:
+      excludes:
+        - G107 # HTTP request with variable URL — expected, we call user-configured S3 endpoints
+  exclusions:
+    paths:
+      - plugin
+
+formatters:
+  enable:
+    - gofmt
+    - goimports

@@ -1,0 +1,8 @@
+{
+  "name": "s3-connector",
+  "version": "0.1.0",
+  "description": "Work with Amazon S3 (or LocalStack/any S3-compatible endpoint): list buckets, list/read/write/delete objects, create/delete buckets. Local Go MCP server, no runtime dependencies.",
+  "author": {
+    "name": "Ferhat"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "s3": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/servers/go/s3-connector-server",
+      "env": {
+        "AWS_REGION": "us-east-1",
+        "AWS_ACCESS_KEY_ID": "PASTE_YOUR_AWS_ACCESS_KEY_ID_HERE",
+        "AWS_SECRET_ACCESS_KEY": "PASTE_YOUR_AWS_SECRET_ACCESS_KEY_HERE",
+        "S3_ENDPOINT_URL": "",
+        "S3_FORCE_PATH_STYLE": "false"
+      }
+    }
+  }
+}
