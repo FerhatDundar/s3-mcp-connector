@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.FerhatDundar/s3-mcp-connector",
-  "description": "MCP server for Amazon S3 and any S3-compatible endpoint (LocalStack, MinIO): list buckets, list/read/write/delete objects, create/delete buckets. Single static Go binary, no runtime dependencies.",
+  "description": "MCP server for Amazon S3 and S3-compatible endpoints (LocalStack, MinIO). Single Go binary.",
   "repository": {
     "url": "https://github.com/FerhatDundar/s3-mcp-connector",
     "source": "github"
