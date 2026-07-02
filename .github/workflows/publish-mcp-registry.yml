@@ -41,10 +41,12 @@ jobs:
     name: Publish to MCP Registry
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout at release tag
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.tag_name }}
+        # Intentionally NOT pinned to inputs.tag_name: server.json is
+        # rendered entirely from the downloaded release assets below, and
+        # scripts/render-server-json.sh must come from a ref that has it
+        # (older release tags predate this script).
 
       - name: Download release assets
         env:
