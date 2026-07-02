@@ -89,3 +89,15 @@ jobs:
         run: |
           gh release upload "${{ needs.release-please.outputs.tag_name }}" \
             "go-server/${ZIP}" --repo "${{ github.repository }}" --clobber
+
+  publish-mcp-registry:
+    name: Publish to MCP Registry
+    needs: [release-please, build-and-attach-assets]
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/publish-mcp-registry.yml
+    with:
+      tag_name: ${{ needs.release-please.outputs.tag_name }}
+      version: ${{ needs.release-please.outputs.version }}

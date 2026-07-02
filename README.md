@@ -7,6 +7,7 @@
 [![CI](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/ci.yml/badge.svg)](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/codeql.yml/badge.svg)](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/codeql.yml)
 [![Latest release](https://img.shields.io/github/v/release/FerhatDundar/s3-mcp-connector?color=blueviolet&label=release)](https://github.com/FerhatDundar/s3-mcp-connector/releases/latest)
+[![MCP Registry](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.modelcontextprotocol.io%2Fv0%2Fservers%3Fsearch%3Ds3-mcp-connector&query=%24.servers%5B0%5D.server.version&label=MCP%20Registry&prefix=v&color=6A2FEE&logo=modelcontextprotocol)](https://registry.modelcontextprotocol.io/?search=s3-mcp-connector)
 [![Go Reference](https://img.shields.io/badge/go-1.25%2B-00ADD8?logo=go&logoColor=white)](https://go.dev/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 [![Tested with LocalStack](https://img.shields.io/badge/tested%20with-LocalStack-6A2FEE?logo=amazonaws&logoColor=white)](https://localstack.cloud/)
@@ -133,10 +134,19 @@ Versions follow [semver](https://semver.org/) and are cut automatically by
 - `feat!: ...` / `BREAKING CHANGE:` footer → major (`v0.2.0` → `v1.0.0`)
 
 Every merged PR updates a standing **"chore(main): release vX.Y.Z"** PR
-with an auto-generated [CHANGELOG.md](CHANGELOG.md). Merging that PR tags
-the release, publishes it on GitHub, and a follow-up job builds and
-attaches zipped, ready-to-install plugin bundles for
-linux/darwin × amd64/arm64. See [.github/workflows/release-please.yml](.github/workflows/release-please.yml).
+with an auto-generated [CHANGELOG.md](CHANGELOG.md). Merging that PR:
+
+1. tags the release and publishes it on GitHub
+2. builds and attaches zipped, ready-to-install plugin bundles for
+   linux/darwin × amd64/arm64
+3. regenerates `server.json` from those exact assets (fresh version +
+   SHA-256 hashes) and publishes it to the
+   [official MCP Registry](https://registry.modelcontextprotocol.io/) via
+   `mcp-publisher`, authenticated with GitHub OIDC — no stored secrets
+
+See [.github/workflows/release-please.yml](.github/workflows/release-please.yml)
+and [.github/workflows/publish-mcp-registry.yml](.github/workflows/publish-mcp-registry.yml)
+(also runnable by hand for an existing tag via `workflow_dispatch`).
 
 ## 📁 Layout
 
@@ -154,12 +164,16 @@ s3-mcp-connector/
 ├── .golangci.yml                ← lint rules
 ├── release-please-config.json  ← semver/changelog automation config
 ├── .release-please-manifest.json
+├── server.json                  ← MCP Registry manifest (regenerated fresh per release by CI)
+├── scripts/
+│   └── render-server-json.sh    ← rebuilds server.json from a release's zip assets
 ├── .github/
 │   ├── workflows/
 │   │   ├── ci.yml                     ← build, vet, test, lint, govulncheck
 │   │   ├── codeql.yml                 ← security scanning
 │   │   ├── pr-title.yml               ← Conventional Commits PR title check
 │   │   ├── release-please.yml         ← version PRs, tagging, GitHub releases
+│   │   ├── publish-mcp-registry.yml   ← publishes server.json to the MCP Registry
 │   │   └── rebuild-release-assets.yml ← manual re-attach fallback
 │   ├── ISSUE_TEMPLATE/
 │   ├── PULL_REQUEST_TEMPLATE.md
