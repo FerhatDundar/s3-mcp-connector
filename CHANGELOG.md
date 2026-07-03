@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.1](https://github.com/FerhatDundar/s3-mcp-connector/compare/v0.2.0...v0.2.1) (2026-07-03)
+
+
+### Bug Fixes
+
+* MCP Registry badge always showed the oldest published version ([8946eb0](https://github.com/FerhatDundar/s3-mcp-connector/commit/8946eb0d82ce3c674f757443a79fe34ed40b27d0))
+* release asset upload used a doubly-nested go-server/go-server path ([7cdad36](https://github.com/FerhatDundar/s3-mcp-connector/commit/7cdad3688f1cc943bde734cff2dd408c189a4656))
+* validate AWS credentials at startup and align MCP server name ([2a7e36c](https://github.com/FerhatDundar/s3-mcp-connector/commit/2a7e36c5ffa3b56bdc0cd42931d188295618d699))
+
 ## [0.2.0](https://github.com/FerhatDundar/s3-mcp-connector/compare/v0.1.0...v0.2.0) (2026-07-02)
 
 
