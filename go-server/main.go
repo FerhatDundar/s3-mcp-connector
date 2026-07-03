@@ -70,6 +70,15 @@ func newS3Client(ctx context.Context) (*s3.Client, error) {
 		return nil, fmt.Errorf("could not load AWS config: %w", err)
 	}
 
+	// Fail fast at startup if no usable credentials are configured, rather
+	// than letting the first tool call surface a confusing AWS SDK error.
+	// This only resolves credentials (env vars, profile, role, etc.) — it
+	// does not make a network call, so it works the same against real AWS
+	// and LocalStack.
+	if _, err := cfg.Credentials.Retrieve(ctx); err != nil {
+		return nil, fmt.Errorf("no usable AWS credentials found: %w (set AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY, or configure a profile/role)", err)
+	}
+
 	endpoint := strings.TrimSpace(os.Getenv("S3_ENDPOINT_URL"))
 	forcePathStyle := isTruthy(os.Getenv("S3_FORCE_PATH_STYLE"))
 
@@ -512,7 +521,7 @@ func main() {
 	}
 	s3Client = client
 
-	s := server.NewMCPServer("s3_connector", "0.1.0", server.WithToolCapabilities(false))
+	s := server.NewMCPServer("s3-mcp-connector", "0.1.0", server.WithToolCapabilities(false))
 
 	s.AddTool(mcp.NewTool("s3_list_buckets",
 		mcp.WithDescription("List S3 buckets visible to the configured credentials. Call this first to confirm AWS credentials and endpoint (real AWS or LocalStack) are working."),
