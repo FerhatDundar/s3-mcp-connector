@@ -35,6 +35,7 @@ jobs:
       run:
         working-directory: go-server
     strategy:
+      fail-fast: false
       matrix:
         include:
           - goos: linux
@@ -93,8 +94,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Note: no "go-server/" prefix here -- this step already runs with
+          # working-directory: go-server (job default), so ZIP is relative
+          # to that. Prefixing it again looks for a nonexistent
+          # go-server/go-server/... path (bit us once, see commit history).
           gh release upload "${{ needs.release-please.outputs.tag_name }}" \
-            "go-server/${ZIP}" --repo "${{ github.repository }}" --clobber
+            "${ZIP}" --repo "${{ github.repository }}" --clobber
 
   publish-mcp-registry:
     name: Publish to MCP Registry

@@ -24,6 +24,7 @@ jobs:
       run:
         working-directory: go-server
     strategy:
+      fail-fast: false
       matrix:
         include:
           - goos: linux
@@ -82,5 +83,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Note: no "go-server/" prefix -- this step already runs with
+          # working-directory: go-server (job default).
           gh release upload "${{ inputs.tag }}" \
-            "go-server/${ZIP}" --repo "${{ github.repository }}" --clobber
+            "${ZIP}" --repo "${{ github.repository }}" --clobber
