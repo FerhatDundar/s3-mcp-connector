@@ -7,7 +7,7 @@
 [![CI](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/ci.yml/badge.svg)](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/codeql.yml/badge.svg)](https://github.com/FerhatDundar/s3-mcp-connector/actions/workflows/codeql.yml)
 [![Latest release](https://img.shields.io/github/v/release/FerhatDundar/s3-mcp-connector?color=blueviolet&label=release)](https://github.com/FerhatDundar/s3-mcp-connector/releases/latest)
-[![MCP Registry](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.modelcontextprotocol.io%2Fv0%2Fservers%3Fsearch%3Ds3-mcp-connector&query=%24.servers%5B0%5D.server.version&label=MCP%20Registry&prefix=v&color=6A2FEE&logo=modelcontextprotocol)](https://registry.modelcontextprotocol.io/?q=s3-mcp-connector)
+[![MCP Registry](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.modelcontextprotocol.io%2Fv0%2Fservers%3Fsearch%3Ds3-mcp-connector&query=%24.servers%5B-1%3A%5D.server.version&label=MCP%20Registry&prefix=v&color=6A2FEE&logo=modelcontextprotocol)](https://registry.modelcontextprotocol.io/?q=s3-mcp-connector)
 [![Go Reference](https://img.shields.io/badge/go-1.25%2B-00ADD8?logo=go&logoColor=white)](https://go.dev/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 [![Tested with LocalStack](https://img.shields.io/badge/tested%20with-LocalStack-6A2FEE?logo=amazonaws&logoColor=white)](https://localstack.cloud/)
